@@ -128,6 +128,11 @@ addAnalysisDescription <- function(data, IdColumnName = "analysisId", nameColumn
                                     "cmAnalysisList.json",
                                     package = "ppi0623")
   cmAnalysisList <- CohortMethod::loadCmAnalysisList(cmAnalysisListFile)
+  SubgroupCovSet <- createSubgroupCovariateSettings(windowStart = -99999, windowEnd = -1, analysisId = 998)
+  
+  for (i in seq_along(cmAnalysisList)){
+    cmAnalysisList[[i]]$getDbCohortMethodDataArgs$covariateSettings <- list(cmAnalysisList[[i]]$getDbCohortMethodDataArgs$covariateSettings, SubgroupCovSet) 
+  }
   idToName <- lapply(cmAnalysisList, function(x) data.frame(analysisId = x$analysisId, description = as.character(x$description)))
   idToName <- do.call("rbind", idToName)
   names(idToName)[1] <- IdColumnName
