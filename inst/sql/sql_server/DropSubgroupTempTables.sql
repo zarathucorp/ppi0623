@@ -1,0 +1,12 @@
+TRUNCATE TABLE #cov_1;
+DROP TABLE #cov_1;
+
+
+/*
+TRUNCATE TABLE #cov_6;
+DROP TABLE #cov_6;
+  TRUNCATE TABLE #cov_7;
+DROP TABLE #cov_7;
+TRUNCATE TABLE #cov_8;
+DROP TABLE #cov_8;
+*/
