@@ -89,6 +89,12 @@ exportAnalyses <- function(outputFolder, exportFolder) {
                                     "cmAnalysisList.json",
                                     package = "ppi0623")
   cmAnalysisList <- CohortMethod::loadCmAnalysisList(cmAnalysisListFile)
+  SubgroupCovSet <- createSubgroupCovariateSettings(windowStart = -99999, windowEnd = -1, analysisId = 998)
+  
+  for (i in seq_along(cmAnalysisList)){
+    cmAnalysisList[[i]]$getDbCohortMethodDataArgs$covariateSettings <- list(cmAnalysisList[[i]]$getDbCohortMethodDataArgs$covariateSettings, SubgroupCovSet) 
+  }
+  
   cmAnalysisToRow <- function(cmAnalysis) {
     ParallelLogger::saveSettingsToJson(cmAnalysis, tempFileName)
     row <- data.frame(analysisId = cmAnalysis$analysisId,
